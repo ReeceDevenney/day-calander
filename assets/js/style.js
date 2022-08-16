@@ -5,7 +5,7 @@ $(".text-area").on("click", "p", function () {
 
     // replace p element with a new textarea
     var textInput = $("<textarea>")
-        .addClass("form-control")
+        .addClass("form-control px-0 w-100")
         .val(text);
     $(this).replaceWith(textInput);
 
@@ -22,3 +22,7 @@ $(".text-area").on("blur", "textarea", function () {
 
     $(this).replaceWith(blurText)
 })
+
+// adds current day to the top of the page
+var now = moment().format("MMMM Do YYYY");
+$("#currentDay").text(now)
