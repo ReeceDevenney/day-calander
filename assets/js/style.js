@@ -22,7 +22,7 @@ $(".text-area").on("blur", "textarea", function () {
     var blurText = $("<p>")
     .text(text)
     .removeClass("form-control")
-    .addClass("w-100 h-100")
+    .addClass("w-100 h-100 text-box")
     .attr("id", id);
 
     $(this).replaceWith(blurText)
@@ -34,14 +34,13 @@ $(".text-area").on("blur", "textarea", function () {
 var now = moment().format("MMMM Do YYYY");
 $("#currentDay").text(now)
 
-
 var current = moment().format("h A");
 console.log(current)
 
 var timeAudit = function(){
-    $(".w-100").each(function() {
+    $(".text-box").each(function() {
         var timeBlock = $(this).attr("id").replace("-Text","")
-        var timeTable = moment(timeBlock, "hh a")
+        var timeTable = moment(timeBlock, "h A")
         $(this).removeClass("bg-danger bg-danger future")
         var timeDifference = moment().diff(timeTable, "minutes")
     
