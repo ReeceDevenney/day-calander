@@ -2,11 +2,14 @@ $(".text-area").on("click", "p", function () {
     var text = $(this)
         .text()
         .trim();
+    
+    var id = $(this).attr("id")
 
     // replace p element with a new textarea
     var textInput = $("<textarea>")
         .addClass("form-control px-0 w-100")
-        .val(text);
+        .val(text)
+        .attr("id", id)
     $(this).replaceWith(textInput);
 
     textInput.trigger("focus")
@@ -14,15 +17,41 @@ $(".text-area").on("click", "p", function () {
 
 $(".text-area").on("blur", "textarea", function () {
     var text = $(this).val();
+    var id = $(this).attr("id")
 
     var blurText = $("<p>")
     .text(text)
     .removeClass("form-control")
     .addClass("w-100 h-100")
+    .attr("id", id);
 
     $(this).replaceWith(blurText)
+
+    timeAudit()
 })
 
 // adds current day to the top of the page
 var now = moment().format("MMMM Do YYYY");
 $("#currentDay").text(now)
+
+
+var current = moment().format("h A");
+console.log(current)
+
+var timeAudit = function(){
+    $(".w-100").each(function() {
+        var timeBlock = $(this).attr("id").replace("-Text","")
+        var timeTable = moment(timeBlock, "hh a")
+        $(this).removeClass("bg-danger bg-danger future")
+        var timeDifference = moment().diff(timeTable, "minutes")
+    
+        if (timeDifference > 60) {
+            $(this).addClass("bg-secondary")
+        } else if (0 < timeDifference && timeDifference < 60) {
+            $(this).addClass("bg-danger")
+        } else {
+            $(this).addClass("bg-success")
+        }
+      });
+} 
+timeAudit()
