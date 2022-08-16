@@ -40,11 +40,11 @@ console.log(current)
 var timeAudit = function(){
     $(".text-box").each(function() {
         var timeTable = moment($(this).attr("id").replace("-Text",""), "h A")
-        $(this).removeClass("bg-danger bg-danger future")
+        $(this).removeClass("bg-danger bg-danger bg-light")
         var timeDifference = moment().diff(timeTable, "minutes")
     
         if (timeDifference > 60) {
-            $(this).addClass("bg-secondary")
+            $(this).addClass("bg-light")
         } else if (0 < timeDifference && timeDifference < 60) {
             $(this).addClass("bg-danger")
         } else {
