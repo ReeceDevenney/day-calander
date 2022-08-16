@@ -39,8 +39,7 @@ console.log(current)
 
 var timeAudit = function(){
     $(".text-box").each(function() {
-        var timeBlock = $(this).attr("id").replace("-Text","")
-        var timeTable = moment(timeBlock, "h A")
+        var timeTable = moment($(this).attr("id").replace("-Text",""), "h A")
         $(this).removeClass("bg-danger bg-danger future")
         var timeDifference = moment().diff(timeTable, "minutes")
     
