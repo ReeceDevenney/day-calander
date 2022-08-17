@@ -35,7 +35,6 @@ var now = moment().format("MMMM Do YYYY");
 $("#currentDay").text(now)
 
 var current = moment().format("h A");
-console.log(current)
 
 var timeAudit = function(){
     $(".text-box").each(function() {
@@ -52,4 +51,26 @@ var timeAudit = function(){
         }
       });
 } 
+
+hourText = []
+
+$(".btn-info").on("click", function(){
+    hourText.push(($(this).siblings(".text-area").children().text()))
+    saveText()
+})
+
+var loadText = function () {
+    hourText = JSON.parse(localStorage.getItem("hourText"));
+
+    if (!hourText) {
+        hourText = {
+        }
+
+    }
+}
+
+var saveText = function () {
+    localStorage.setItem("hourText", JSON.stringify(hourText));
+  };
+
 timeAudit()
