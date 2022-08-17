@@ -52,25 +52,14 @@ var timeAudit = function(){
       });
 } 
 
-hourText = []
-
 $(".btn-info").on("click", function(){
-    hourText.push(($(this).siblings(".text-area").children().text()))
-    saveText()
+    var test1 = ($(this).siblings(".text-area").children().attr("id"))
+    var test2 = ((($(this).siblings(".text-area").children().text())))
+    localStorage.setItem(test1, test2)
 })
 
-var loadText = function () {
-    hourText = JSON.parse(localStorage.getItem("hourText"));
-
-    if (!hourText) {
-        hourText = {
-        }
-
-    }
-}
-
-var saveText = function () {
-    localStorage.setItem("hourText", JSON.stringify(hourText));
-  };
+$(".text-box").each(function(){
+    $(this).text(localStorage.getItem($(this).attr("id")))
+})
 
 timeAudit()
