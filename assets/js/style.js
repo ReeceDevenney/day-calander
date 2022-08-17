@@ -1,3 +1,4 @@
+// on click turns the section of the calander into a text area to write in
 $(".text-area").on("click", "p", function () {
     var text = $(this)
         .text()
@@ -14,7 +15,7 @@ $(".text-area").on("click", "p", function () {
 
     textInput.trigger("focus")
 })
-
+// when clicking off of the text area, return it to a <p>
 $(".text-area").on("blur", "textarea", function () {
     var text = $(this).val();
     var id = $(this).attr("id")
@@ -33,9 +34,9 @@ $(".text-area").on("blur", "textarea", function () {
 // adds current day to the top of the page
 var now = moment().format("MMMM Do YYYY");
 $("#currentDay").text(now)
-
+//give the current time
 var current = moment().format("h A");
-
+//checks for the difference between the blocks time and current time and changes the background accordingly
 var timeAudit = function(){
     $(".text-box").each(function() {
         var timeTable = moment($(this).attr("id").replace("-Text",""), "h A")
@@ -51,13 +52,13 @@ var timeAudit = function(){
         }
       });
 } 
-
+//on clicking the save button save the info to the local storage.  the key is the text-area's ID and the value is the text in the box
 $(".btn-info").on("click", function(){
-    var test1 = ($(this).siblings(".text-area").children().attr("id"))
-    var test2 = ((($(this).siblings(".text-area").children().text())))
-    localStorage.setItem(test1, test2)
+    var key = ($(this).siblings(".text-area").children().attr("id"))
+    var value = ((($(this).siblings(".text-area").children().text())))
+    localStorage.setItem(key, value)
 })
-
+// update text-areas with what is saved in local storage, matching based on the key value and the area's ID
 $(".text-box").each(function(){
     $(this).text(localStorage.getItem($(this).attr("id")))
 })
